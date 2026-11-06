@@ -8,10 +8,19 @@
 
 > **Ключ активации — бесплатно.** После установки программа при первом запуске попросит лицензионный ключ. Он выдаётся бесплатно по запросу: откройте [запрос ключа](https://github.com/MrRomecat/LoopStudio/issues/new?template=key-request.md) в разделе Issues. Подробнее — в разделе [Активация](#активация-и-ключ).
 
+## Видеообзор
+
+Полный разбор того, как работает программа, от выбора видеофона до готового ролика. Нажмите на обложку, видео откроется на YouTube:
+
+[![Видеообзор LoopStudio: как сделать зацикленное видео для YouTube, атмосферный ролик или музыку для сна](https://img.youtube.com/vi/2MxnRaLnTCs/maxresdefault.jpg)](https://www.youtube.com/watch?v=2MxnRaLnTCs)
+
+▶ [Вы всё делаете вручную? Этот софт для зацикленных видео меняет всё!](https://www.youtube.com/watch?v=2MxnRaLnTCs)
+
 ---
 
 ## Содержание
 
+- [Видеообзор](#видеообзор)
 - [Для чего нужна LoopStudio](#для-чего-нужна-loopstudio)
 - [Скриншоты](#скриншоты)
 - [Возможности](#возможности)
@@ -227,7 +236,7 @@ Get-FileHash .\LoopStudio-1.5.4-setup.exe -Algorithm SHA256
 3. Нажмите **«Сгенерировать»**. Диалог закроется, прогресс появится внизу формы.
 4. По завершении нажмите **«Открыть папку»**: рядом с mp4 лежат треклист и паспорт рендера.
 
-Если хотите пройти все шесть шагов руками, двигайтесь по степперу сверху: Видео → Музыка → Микс → Эффекты → Экспорт → Рендер. Переход между шагами свободный.
+Если хотите пройти все шесть шагов руками, двигайтесь по степперу сверху: Видео → Музыка → Микс → Эффекты → Экспорт → Рендер. Переход между шагами свободный. Весь процесс целиком показан в [видеообзоре](https://www.youtube.com/watch?v=2MxnRaLnTCs).
 
 ## Частые вопросы
 
@@ -314,4 +323,4 @@ Typical use: **ambient videos**, **sleep music**, **sleep stories and bedtime au
 
 Highlights: music is never cut mid-track, −14 LUFS normalization, crossfades and pauses, built-in royalty-free ambience library, Ken Burns motion, color filters and VFX overlays, NVENC/QSV/AMF hardware encoding, render queue with crash recovery, tracklist and chapters for the YouTube description, project files and channel profiles.
 
-Download the installer from [Releases](https://github.com/MrRomecat/LoopStudio/releases/latest). The app asks for an activation key on first launch; **keys are free on request**, just open a [key request issue](https://github.com/MrRomecat/LoopStudio/issues/new?template=key-request.md). The interface is in Russian.
+Watch the full walkthrough (in Russian): [video overview on YouTube](https://www.youtube.com/watch?v=2MxnRaLnTCs). Download the installer from [Releases](https://github.com/MrRomecat/LoopStudio/releases/latest). The app asks for an activation key on first launch; **keys are free on request**, just open a [key request issue](https://github.com/MrRomecat/LoopStudio/issues/new?template=key-request.md). The interface is in Russian.
