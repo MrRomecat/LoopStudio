@@ -1,0 +1,49 @@
+LoopStudio — сторонние компоненты и их лицензии
+Third-party components and licenses
+================================================================
+
+LoopStudio использует перечисленные ниже свободные компоненты. Их лицензии
+не ограничивают использование роликов, созданных в LoopStudio: все условия
+относятся к распространению самой программы.
+
+1. FFmpeg (bin/ffmpeg.exe, bin/ffprobe.exe)
+   Сборка: gyan.dev full build (строка версии видна по «ffmpeg -version»).
+   Лицензия: GNU GPL версии 3 (сборка включает GPL-компоненты).
+   Полный текст: файл GPL-3.0.txt рядом (и https://www.gnu.org/licenses/gpl-3.0.html)
+   Исходный код FFmpeg: https://ffmpeg.org/download.html
+   Исходники и скрипты этой сборки: https://www.gyan.dev/ffmpeg/builds/
+   По запросу покупателя продавец LoopStudio предоставит копию исходного
+   кода FFmpeg, соответствующего поставляемым бинарникам.
+   FFmpeg is a trademark of Fabrice Bellard, originator of the FFmpeg project.
+
+2. Qt 6 / PySide6 / Shiboken6 (папка PySide6/, shiboken6/)
+   © The Qt Company Ltd. and other contributors.
+   Лицензия: GNU LGPL версии 3.
+   Полный текст: файл LGPL-3.0.txt рядом (и https://www.gnu.org/licenses/lgpl-3.0.html)
+   Исходный код Qt: https://download.qt.io/official_releases/qt/
+   Исходный код PySide6: https://code.qt.io/cgit/pyside/pyside-setup.git/
+   Qt-библиотеки поставляются отдельными динамическими DLL — замена их
+   совместимыми версиями пользователем не ограничивается.
+
+3. Python 3.13 (python313.dll и стандартная библиотека)
+   © Python Software Foundation.
+   Лицензия: PSF License (файл Python-LICENSE.txt рядом).
+
+4. cryptography (папка cryptography/)
+   Лицензия: Apache-2.0 или BSD-3-Clause (на выбор получателя).
+   Полные тексты поставляются в папке cryptography-*.dist-info/licenses/.
+
+5. PyInstaller bootloader (LoopStudio.exe создан PyInstaller)
+   Лицензия: GPL 2.0 с явным исключением, разрешающим использовать
+   собранные приложения без ограничений (в том числе коммерчески).
+   https://pyinstaller.org/en/stable/license.html
+
+6. Шрифты Lora, Manrope, JetBrains Mono (assets/fonts/)
+   Лицензия: SIL Open Font License 1.1 — свободное использование и
+   распространение, в том числе в коммерческом ПО.
+   Полные тексты: файлы OFL-Lora.txt, OFL-Manrope.txt,
+   OFL-JetBrainsMono.txt рядом. Источник: официальный репозиторий
+   Google Fonts (github.com/google/fonts).
+
+Собственные материалы LoopStudio (встроенная библиотека звуков, оверлеев и
+демо — assets/) сгенерированы процедурно и описаны в assets/LICENSES.txt.
