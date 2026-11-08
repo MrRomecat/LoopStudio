@@ -1,0 +1,20 @@
+# Виртуальное окружение и кэши
+.venv/
+__pycache__/
+*.pyc
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# Внешние бинарники (докачиваются scripts/fetch_ffmpeg.py)
+bin/
+
+# Сборка
+build/
+dist/
+*.egg-info/
+*.spec.bak
+
+# Логи и временные файлы
+logs/
+tests/.fixtures/

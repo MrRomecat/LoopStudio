@@ -34,6 +34,7 @@
 - [Где хранятся данные](#где-хранятся-данные)
 - [Известные ограничения](#известные-ограничения)
 - [Лицензии и условия использования](#лицензии-и-условия-использования)
+- [Исходный код и сборка из исходников](#исходный-код-и-сборка-из-исходников)
 - [История версий](#история-версий)
 - [English summary](#english-summary)
 
@@ -285,19 +286,71 @@ Get-FileHash .\LoopStudio-1.5.4-setup.exe -Algorithm SHA256
 
 **LoopStudio** распространяется бесплатно в виде готовой сборки. Ролики, созданные в программе, принадлежат вам целиком, включая монетизированные каналы. Перепродавать программу и выдавать её за свою нельзя.
 
-**Встроенная библиотека** (10 эмбиентов, 5 оверлеев, демо-фоны и демо-треки) создана процедурно и свободна от прав третьих лиц: используйте в любых роликах без указания авторства, см. [licenses/ASSETS-LICENSE.txt](licenses/ASSETS-LICENSE.txt).
+**Встроенная библиотека** (10 эмбиентов, 5 оверлеев, демо-фоны и демо-треки) создана процедурно и свободна от прав третьих лиц: используйте в любых роликах без указания авторства, см. [assets/LICENSES.txt](assets/LICENSES.txt).
 
-**Сторонние компоненты** в составе сборки, полный перечень в [licenses/NOTICE.txt](licenses/NOTICE.txt):
+**Сторонние компоненты** в составе сборки, полный перечень в [packaging/licenses/NOTICE.txt](packaging/licenses/NOTICE.txt):
 
 | Компонент | Лицензия |
 |---|---|
-| FFmpeg (сборка gyan.dev full) | GPL-3.0, текст в [licenses/GPL-3.0.txt](licenses/GPL-3.0.txt). Исходный код этой сборки доступен на https://www.gyan.dev/ffmpeg/builds/ и предоставляется по запросу |
-| Qt 6 / PySide6 | LGPL-3.0, текст в [licenses/LGPL-3.0.txt](licenses/LGPL-3.0.txt) |
+| FFmpeg (сборка gyan.dev full) | GPL-3.0, текст в [packaging/licenses/GPL-3.0.txt](packaging/licenses/GPL-3.0.txt). Исходный код этой сборки доступен на https://www.gyan.dev/ffmpeg/builds/ и предоставляется по запросу |
+| Qt 6 / PySide6 | LGPL-3.0, текст в [packaging/licenses/LGPL-3.0.txt](packaging/licenses/LGPL-3.0.txt) |
 | Python 3.13 | PSF License |
 | cryptography | Apache-2.0 / BSD-3-Clause |
 | Шрифты Lora, Manrope, JetBrains Mono | SIL Open Font License 1.1 |
 
 Эти лицензии касаются только распространения самой программы и никак не ограничивают ваши ролики.
+
+## Исходный код и сборка из исходников
+
+В репозитории лежит полный исходный код LoopStudio 1.5.4. Стек: Python 3.12+, PySide6 (Qt 6), FFmpeg как внешний бинарник, cryptography для проверки ключей, PyInstaller и Inno Setup для упаковки. Код типизирован под mypy strict, покрыт тестами на фикстурах, которые генерируются FFmpeg прямо в тестах.
+
+### Структура
+
+| Папка | Что внутри |
+|---|---|
+| `core/` | движок: `media` (обёртка FFmpeg, ffprobe, фильтры), `audio` (плейлист, резиновый таймлайн, сведение), `video` (луп, эффекты), `render` (конвейер A–G, очередь, журнал, паспорт, пре-флайт), `licensing` (проверка ключа, хранение активации), `metadata`, `ui` (общие виджеты и тема) |
+| `modules/loopstudio/` | экран мастера из 6 шагов, контроллер, диалоги. Импортирует только `core` |
+| `shell/` | точка входа `python -m shell`, главное окно, меню, окно активации |
+| `assets/` | встроенная библиотека: эмбиенты, оверлеи, демо, шрифты, иконка |
+| `packaging/` | `loopstudio.spec` для PyInstaller, `installer.iss` для Inno Setup, тексты лицензий |
+| `scripts/` | `fetch_ffmpeg.py`, `generate_assets.py`, `make_icon.py`, `build_dist.ps1` |
+| `tests/` | юнит- и интеграционные тесты (pytest, pytest-qt) |
+
+### Запуск из исходников
+
+```powershell
+git clone https://github.com/MrRomecat/LoopStudio.git
+cd LoopStudio
+python -m venv .venv
+.venv\Scripts\python -m pip install -e .[dev]
+.venv\Scripts\python scripts\fetch_ffmpeg.py
+.venv\Scripts\python -m shell
+```
+
+Скрипт `fetch_ffmpeg.py` копирует `ffmpeg.exe` и `ffprobe.exe` из системного PATH, а если их нет, скачивает сборку gyan.dev в папку `bin/`.
+
+### Проверки
+
+```powershell
+.\check.ps1
+```
+
+Прогоняет ruff, ruff format, mypy strict и pytest. Тесты сами генерируют короткие видео- и аудиофикстуры через FFmpeg, поэтому `bin/` должна быть заполнена.
+
+### Сборка установщика
+
+```powershell
+.\scripts\build_dist.ps1
+```
+
+Результат: портативная папка `dist\LoopStudio\` и, если установлен Inno Setup 6, установщик `dist\installer\LoopStudio-<версия>-setup.exe`.
+
+### Что намеренно не опубликовано
+
+- **Генератор лицензионных ключей и приватный ключ подписи.** В коде есть только публичный ключ и проверка подписи (`core/licensing/validate.py`). Ключи по-прежнему выдаёт автор бесплатно по [запросу](https://github.com/MrRomecat/LoopStudio/issues/new?template=key-request.md). Тест `test_licensing`, который зависит от генератора, в репозиторий не вошёл.
+- **Другие продукты линейки Studio Suite** (PreviuStudio, MuseStudio), которые живут в том же внутреннем монорепозитории и делят с LoopStudio ядро `core/`. Здесь только LoopStudio.
+
+Ключ не привязан к серверу и проверяется оффлайн, так что при желании вы можете собрать свою версию из исходников. Готовый установщик из Releases остаётся самым простым способом начать.
 
 ## История версий
 
